@@ -8,7 +8,7 @@ def schuiver():
     byte = str(bitwaarde).zfill(8)
     if n > 8 or n < -8:
         print("Out of range")
-    elif n > 0:
+    elif n < 0:
         tmp = byte[-n:]
         rest = byte[:-n]
         new_byte = tmp + rest
