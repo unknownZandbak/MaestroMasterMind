@@ -25,46 +25,5 @@ def op1v3():
         print(x*"*")
 
 
-def op2():
-    pass
-
-
-def op3():
-    pass
-
-
-def op4():
-    woord = "lepel"
-    print(woord == woord[::-1])
-
-
-def op5():
-    pass
-
-
-def op6():
-    pass
-
-
-def op7():
-    pass
-
-
-def op8():
-    pass
-
-
-def op9():
-    pass
-
-
-def op10():
-    pass
-
-
-def op11():
-    pass
-
-
 if __name__ == "__main__":
-    op4()
+    op1()
