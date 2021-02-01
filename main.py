@@ -34,7 +34,8 @@ def op3():
 
 
 def op4():
-    pass
+    woord = "lepel"
+    print(woord == woord[::-1])
 
 
 def op5():
@@ -66,4 +67,4 @@ def op11():
 
 
 if __name__ == "__main__":
-    op1v3()
+    op4()
