@@ -17,6 +17,14 @@ def op1v2():
         print(count*"*")
 
 
+def op1v3():
+    aantal = int(input("Hoe Groot? : "))
+    for i in range(aantal, 1, -1):
+        print(i*"*")
+    for x in range(1, aantal+1):
+        print(x*"*")
+
+
 def op2():
     pass
 
@@ -58,4 +66,4 @@ def op11():
 
 
 if __name__ == "__main__":
-    op1v2()
+    op1v3()
