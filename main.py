@@ -6,6 +6,17 @@ def op1():
         print(x*"*")
 
 
+def op1v2():
+    aantal = int(input("Hoe Groot? : "))
+    count = 0
+    while count <= aantal:
+        count += 1
+        print(count*"*")
+    while count > 1:
+        count -= 1
+        print(count*"*")
+
+
 def op2():
     pass
 
@@ -47,4 +58,4 @@ def op11():
 
 
 if __name__ == "__main__":
-    op1()
+    op1v2()
