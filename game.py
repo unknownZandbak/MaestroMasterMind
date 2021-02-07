@@ -1,50 +1,70 @@
 import random
 
-# Instellen van een aantal variabellen zoals de code en gok zodat ze door elke functie gewijzigd kunnen worden
-# Voor de kleuren gebruik ik getallen van 1 t/m 6 (zes verschillende "kleuren")
+# While True loop is used as a main game loop
+while True:
 
-code = [0, 0, 0, 0]
-gok = [1, 1, 1, 1]
-answer = [0, 0, 0, 0]
-cnt = 1
+    # Instellen van een aantal variabellen zoals de code en gok zodat ze door elke functie gewijzigd kunnen worden
+    # Voor de kleuren gebruik ik getallen van 1 t/m 6 (zes verschillende "kleuren")
+    # Dit zorgt ervoor dat er met elke nieuwe game er een schoon blad is voor de nieuwe game
+    code = ["%ph%", "%ph%", "%ph%", "%ph%"]
+    gokken = [["%ph%", "%ph%", "%ph%", "%ph%"] for i in range(9)]
+    answer = ["%ph%", "%ph%", "%ph%", "%ph%"]
+    answers = [answer for i in range(9)]
+    ronde = 0
+    win = False
+    colorCode = {
+        1: "Rood",
+        2: "Blauw",
+        3: "Groen",
+        4: "Geel",
+        5: "Zwart",
+        6: "Oranje"
+    }
 
-
-def startup():
-    code[0] = random.randint(1, 6)
-    code[1] = random.randint(1, 6)
-    code[2] = random.randint(1, 6)
-    code[3] = random.randint(1, 6)
+    # Het maken van de code door random een getal tussen 1 t/m 6 te kiezen voor ellke index
+    for i in range(0, 4):
+        code[i] = random.randint(1, 6)
     print(f"\nCode gegenereerd: {code}")
 
+    while ronde < 8:
 
-def question():
-    global cnt
-    print(f"\nGok {cnt}")
-    gok[0] = random.randint(1, 6)
-    gok[1] = random.randint(1, 6)
-    gok[2] = random.randint(1, 6)
-    gok[3] = random.randint(1, 6)
-    cnt += 1
-    print(f"Gok gegenereerd {gok}")
+        # Hier doen we nu een random gok voordat we het algoritme gaan implementeren
+        ronde += 1
+        print(f"\nGok {ronde}")
+        for i in range(0, 4):
+            gokken[ronde][i] = random.randint(1, 6)
+        print(f"Gok gegenereerd {gokken[ronde]}")
 
-# Voor feedback gebruik ik d volgende getallen met de bij genoteerde betekenis
-# 0: Fout
-# 1: Goede kleur maar niet op de juiste plek
-# 2: Goede kleur en op de juiste plek
-# De positie van de getallen in het antwoord zeggen niet over welke "kleur" goed is en welke fout
+        # een tijdelijke lijst voor het maken van feedback
+        tmp_code = [i for i in code]
 
+        '''
+        Voor feedback gebruik ik d volgende getallen met de bij genoteerde betekenis
+        0: Fout
+        1: Goede kleur maar niet op de juiste plek
+        2: Goede kleur en op de juiste plek
+        De positie van de getallen in het antwoord zeggen niet over welke "kleur" goed is en welke fout
+        '''
+        nummer = 0
+        for i in gokken[ronde]:
+            if i in tmp_code:
+                if gokken[ronde].index(i) == code.index(i):
+                    answers[ronde][nummer] = 2
+                else:
+                    answers[ronde][nummer] = 1
+                tmp_code.remove(i)
+            else:
+                answers[ronde][nummer] = 0
+            nummer += 1
+        print(f"Feedback gegenereerd: {answer}")
 
-def feedback():
-    for i in range(0, 3):
-        if gok[i] == code[i]:
-            answer[i] = 2
-        elif gok[i] in code:
-            answer[i] = 1
-        else:
-            answer[i] = 0
-    print(f"Feedback gegenereerd: {answer}")
-
-
-startup()
-question()
-feedback()
+        # Check of de code goed geraden is
+        if gokken[ronde] == code:
+            win = True
+            break
+    if win:
+        print(f"\n\nGefeliciteerd je hebt gewonnen in ronde {ronde} !!!!!!")
+        break
+    else:
+        print(f"\n\nHelaas je hebt de code niet goed geraden")
+        break
