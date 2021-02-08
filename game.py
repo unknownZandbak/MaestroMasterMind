@@ -1,6 +1,11 @@
 import random
 import maestro as ma
 
+"""
+your comments need to be english, bring consistency to your variable names all englis or dutch
+and sometimes a little to much information given in the comments for my taste.
+the code is well written as far as i can see keep it up :]
+"""
 
 # While True loop is used as a main game loop
 while True:
