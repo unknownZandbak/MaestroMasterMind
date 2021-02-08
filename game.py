@@ -1,4 +1,6 @@
 import random
+import maestro as ma
+
 
 # While True loop is used as a main game loop
 while True:
@@ -20,7 +22,6 @@ while True:
         5: "Zwart",
         6: "Oranje"
     }
-
     # Het maken van de code door random een getal tussen 1 t/m 6 te kiezen voor ellke index
     for i in range(0, 4):
         code[i] = random.randint(1, 6)
@@ -31,8 +32,7 @@ while True:
         # Hier doen we nu een random gok voordat we het algoritme gaan implementeren
         ronde += 1
         print(f"\nGok {ronde}")
-        for i in range(0, 4):
-            gokken[ronde][i] = random.randint(1, 6)
+        gokken[ronde] = ma.gok(ronde, answers, gokken)
         print(f"Gok gegenereerd {gokken[ronde]}")
 
         # een tijdelijke lijst voor het maken van feedback
@@ -63,8 +63,12 @@ while True:
             win = True
             break
     if win:
-        print(f"\n\nGefeliciteerd je hebt gewonnen in ronde {ronde} !!!!!!")
+        print(f"\n\nGefeliciteerd je hebt gewonnen in ronde {ronde} !!!!!\n")
         break
     else:
-        print(f"\n\nHelaas je hebt de code niet goed geraden")
+        print(f"\n\nHelaas je hebt de code niet goed geraden\n")
         break
+    # if input("Wil je nog een keer spelen? j of n : ") == "j":
+    #     continue
+    # else:
+    #     break
