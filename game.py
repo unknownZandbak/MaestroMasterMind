@@ -16,8 +16,7 @@ while True:
     '''
     code = ["%ph%", "%ph%", "%ph%", "%ph%"]
     guesses = [["%ph%", "%ph%", "%ph%", "%ph%"] for i in range(9)]
-    answer = ["%ph%", "%ph%", "%ph%", "%ph%"]
-    answers = [answer for i in range(9)]
+    answers = [[0, 0, 0, 0] for i in range(9)]
     round = 0
     win = False
     colorCode = {
@@ -39,11 +38,11 @@ while True:
         # make a gues
         round += 1
         print(f"\nGok {round}")
-        guesses[round] = ma.gok(round, answers, guesses)
+        guesses[round] = ma.gok(round, answers[round-1], guesses[round-1])
         print(f"Gok gegenereerd {guesses[round]}")
 
         # a temp code var in order to correctly create feedback
-        tmp_code = [i for i in code]
+        tmp_code = code.copy()
 
         '''
         Voor feedback gebruik ik d volgende getallen met de bij genoteerde betekenis
@@ -52,18 +51,19 @@ while True:
         2: Goede kleur en op de juiste plek
         De positie van de getallen in het antwoord zeggen niet over welke "kleur" goed is en welke fout
         '''
-        nummer = 0
-        for i in guesses[round]:
-            if i in tmp_code:
-                if guesses[round].index(i) == code.index(i):
-                    answers[round][nummer] = 2
-                else:
-                    answers[round][nummer] = 1
-                tmp_code.remove(i)
-            else:
-                answers[round][nummer] = 0
-            nummer += 1
-        print(f"Feedback gegenereerd: {answer}")
+        number = 0
+        for i in tmp_code:
+            if i == guesses[round][number]:
+                answers[round][number] = 2
+                tmp_code[number] = 0
+            number += 1
+        number = 0
+        for i in tmp_code:
+            if i in guesses[round]:
+                answers[round][number] = 1
+            number += 1
+
+        print(f"Feedback gegenereerd: {answers[round]}")
 
         # Check of de code goed geraden is
         if guesses[round] == code:
