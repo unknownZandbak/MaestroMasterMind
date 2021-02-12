@@ -26,9 +26,9 @@ Source: https://theses.liacs.nl/pdf/2018-2019-GraafSde.pdf.
 #### MaestroV1
 possible_guesses = list(itertools.product(range(1, 7), repeat=4))
 
-
+```
 def gok(round, answer, guess):
-    if round == 1:
+	if round == 1:
         return [1, 1, 2, 2]
     else:
         nieuwe_opties = bereken_nieuwe_opties(answer, guess)
@@ -70,3 +70,4 @@ def bereken_nieuwe_opties(answer, guess):
         if tmp_answer != answer:
             possible_guesses.remove(code)
     return possible_guesses
+```
