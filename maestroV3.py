@@ -16,10 +16,10 @@ def gok(round, answer, guess):
         return [1, 1, 2, 2]
     elif round == 2:
         bereken_nieuwe_opties(answer, guess)
-        return [2, 2, 1, 1]
-    elif round == 3:
-        bereken_nieuwe_opties(answer, guess)
-        return [4, 4, 6, 6]
+        return [3, 4, 5, 5]
+    # elif round == 3:
+    #     bereken_nieuwe_opties(answer, guess)
+    #     return [4, 4, 6, 6]
     else:
         bereken_nieuwe_opties(answer, guess)
         nieuwe_opties = minmax()

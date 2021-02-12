@@ -61,7 +61,7 @@ while True:
     }
     gamemode_choice = int(input(
         "Kies een algorithme om te laten spelen.\n1: Simple strategy\n2: MiniMax Only Knuth Codes\n3: MiniMax Only Knuth Codes + mijn eigen heuristiek\nKeuze: "))
-    if gamemode_choice != 1 or gamemode_choice != 2 or gamemode_choice != 3:
+    if gamemode_choice != 1 and gamemode_choice != 2 and gamemode_choice != 3:
         print("\nVerkeerde optie ingevoerd\nProgramma stopt nu")
         break
     gen_code()
