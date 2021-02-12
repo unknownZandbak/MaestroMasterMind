@@ -24,50 +24,79 @@ Source: https://theses.liacs.nl/pdf/2018-2019-GraafSde.pdf.
 ## Pseudo Code
 
 #### MaestroV1
-possible_guesses = list(itertools.product(range(1, 7), repeat=4))
 
 ```
-def gok(round, answer, guess):
-	if round == 1:
+possible_guesses = all possible guesses (only generated once)
+
+def guess(round, previouse feedback, guess):
+    if round == 1:
         return [1, 1, 2, 2]
     else:
-        nieuwe_opties = bereken_nieuwe_opties(answer, guess)
+        nieuwe_opties = bereken_nieuwe_opties(previouse feedback, guess)
         return eerste item uit nieuwe opties
 
 
-def bereken_nieuwe_opties(answer, guess):
-    tmp_answer = [0, 0]
+def bereken_nieuwe_opties(previouse feedback, guess):
+    tmp_viouse feedback = [0, 0]
     copy_possible_guesses = possible_guesses.copy()
 
     for code in copy_possible_guesses:
-        tmp_answer[0] = 0
-        tmp_answer[1] = 0
-        tmp_code = list(code).copy()
-        tmp_guess = list(guess).copy()
+        tmp_feedback[0] = 0
+        tmp_feedback[1] = 0
+        tmp_code = copy of code
+        tmp_guess = copy of guess
         number = 0
         for i in guess:
             if tmp_code[number] == i:
-                tmp_answer[0] += 1
-                x = list(tmp_code)
-                x[number] = 0
-                tmp_code = tuple(x)
-                y = list(tmp_guess)
-                y[number] = 0
-                tmp_guess = tuple(y)
-
-            number += 1
+                tmp_feedback[0] += 1
+                change the number in tmp_code to 0
+                change the number in tmp_guess to 0
+            number + 1
         number = 0
         for i in tmp_guess:
-            if i in tmp_code and i != 0:
-                tmp_answer[1] += 1
-                x = list(tmp_code)
-                x[x.index(i)] = 0
-                tmp_code = tuple(x)
-                y = list(tmp_guess)
-                y[number] = 0
-                tmp_guess = tuple(y)
+            if i is in tmp_code and is not a 0:
+                change the number in tmp_code to 0
+                change the number in tmp_guess to 0
             number += 1
-        if tmp_answer != answer:
-            possible_guesses.remove(code)
+        if tmp_feedback is not the same as previouse feedback:
+            remove code from possible_guesses
     return possible_guesses
+```
+---
+#### MaestroV2
+
+```
+def minmax():
+    for i in possible_guesses:
+        for j in possible_guesses:
+            feedback = gen_feedback(i, j)
+            times_found[feedback]++
+
+        highest = get the highest times found feedback
+        scores[i] = highest
+
+    lowest = get the lowest times found feedback
+
+    for i in possible_guesses:
+        if scores[] is the same as lowest:
+            add code to new_posibble_guesses
+    return new_possible_guesses
+
+```
+---
+#### Maestrov3 
+the only change opposte to maestroV2 is in de geuss function
+```
+possible_guesses = all possible guesses (only generated once)
+
+def guess(round, previouse feedback, guess):
+    if round == 1:
+        return [1, 1, 2, 2]
+    elif round == 2:
+        bereken_nieuwe_opties(previouse feedback, guess)
+        return [4, 4, 5, 5]
+    else:
+        bereken_nieuwe_opties(previouse feedback, guess)
+        nieuwe_opties = minmax()
+        return eerste item uit nieuwe opties
 ```
