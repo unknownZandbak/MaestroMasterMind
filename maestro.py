@@ -15,12 +15,12 @@ def gok(round, answer, guess):
     if round == 1:
         return [1, 1, 2, 2]
     else:
-        nieuwe_opties = bereken_nieuwe_opties(round, answer, guess)
+        nieuwe_opties = bereken_nieuwe_opties(answer, guess)
         # return random.choice(nieuwe_opties)
         return nieuwe_opties[0]
 
 
-def bereken_nieuwe_opties(round, answer, guess):
+def bereken_nieuwe_opties(answer, guess):
     tmp_answer = [0, 0]
     copy_possible_guesses = possible_guesses.copy()
 

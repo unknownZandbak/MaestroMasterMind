@@ -1,5 +1,6 @@
 import random
 import maestro as ma
+import maestroV2 as maV2
 
 
 def gen_code():
@@ -11,7 +12,8 @@ def make_guess():
     global round
     round += 1
     print(f"\nGok: {round}")
-    guesses[round] = ma.gok(round, answers[round-1], guesses[round-1])
+    # guesses[round] = ma.gok(round, answers[round-1], guesses[round-1])
+    guesses[round] = maV2.gok(round, answers[round-1], guesses[round-1])
 
 
 def gen_feedback():
