@@ -1,6 +1,7 @@
 import random
 import maestro as ma
 import maestroV2 as maV2
+import maestroV3 as maV3
 
 
 def gen_code():
@@ -9,11 +10,13 @@ def gen_code():
 
 
 def make_guess():
-    global round
-    round += 1
     print(f"\nGok: {round}")
-    # guesses[round] = ma.gok(round, answers[round-1], guesses[round-1])
-    guesses[round] = maV2.gok(round, answers[round-1], guesses[round-1])
+    if gamemode_choice == 1:
+        guesses[round] = ma.gok(round, answers[round-1], guesses[round-1])
+    elif gamemode_choice == 2:
+        guesses[round] = maV2.gok(round, answers[round-1], guesses[round-1])
+    elif gamemode_choice == 3:
+        guesses[round] = maV3.gok(round, answers[round-1], guesses[round-1])
 
 
 def gen_feedback():
@@ -56,12 +59,17 @@ while True:
         5: "Zwart",
         6: "Oranje"
     }
-
+    gamemode_choice = int(input(
+        "Kies een algorithme om te laten spelen.\n1: Simple strategy\n2: MiniMax Only Knuth Codes\n3: MiniMax Only Knuth Codes + mijn eigen heuristiek\nKeuze: "))
+    if gamemode_choice != 1 or gamemode_choice != 2 or gamemode_choice != 3:
+        print("\nVerkeerde optie ingevoerd\nProgramma stopt nu")
+        break
     gen_code()
     print(f"\nSecret code gegenereerd: {code}")
 
     while round < 8:
 
+        round += 1
         make_guess()
         print(f"De secret code is:      {code}")
         print(f"Gok gegenereerd:        {guesses[round]}")
